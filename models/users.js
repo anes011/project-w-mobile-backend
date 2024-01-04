@@ -22,7 +22,7 @@ const usersSchema = new Schema ({
     },
     profilePhoto: {
         type: String,
-        default: 'https://res.cloudinary.com/dmvjkyphz/image/upload/v1704295450/output-onlinepngtools_plva8b.png'
+        required: true
     },
     date: {
         type: Date,
@@ -44,7 +44,13 @@ usersSchema.pre('save', async function (next) {
     }
 });
 
-
+usersSchema.methods.comparePassword = async function(enteredPassword) {
+    try {
+        return await bcrypt.compare(enteredPassword, this.password);
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 const users = mongoose.model('users', usersSchema);
 

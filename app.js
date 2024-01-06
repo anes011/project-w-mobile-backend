@@ -5,20 +5,27 @@ const port = 4000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-// routes
+// imported routes
 const users = require('./routes/users');
+const offer = require('./routes/offer');
 
+
+// Database connection config:
 mongoose.connect('mongodb://localhost:27017/project-w-mobile-backend');
 
 const db = mongoose.connection;
 
 db.on('error', (err) => console.error(err));
 db.once('open', () => console.log('Database is up nd running :)!'));
+// end of database connection config
 
 app.use(cors());
 app.use(express.json());
 
+
+// Activating routes
 app.use('/users', users);
+app.use('/offer', offer);
 
 const server = http.createServer(app);
 

@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 // imported routes
 const users = require('./routes/users');
 const offer = require('./routes/offer');
+const reservation = require('./routes/reservation');
 
 
 // Database connection config:
@@ -26,6 +27,7 @@ app.use(express.json());
 // Activating routes
 app.use('/users', users);
 app.use('/offer', offer);
+app.use('/reserve', reservation);
 
 const server = http.createServer(app);
 

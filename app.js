@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/users');
 const offer = require('./routes/offer');
 const reservation = require('./routes/reservation');
+const acceptedReservation = require('./routes/acceptedReservation');
 
 
 // Database connection config:
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use('/users', users);
 app.use('/offer', offer);
 app.use('/reserve', reservation);
+app.use('/accepted', acceptedReservation);
 
 const server = http.createServer(app);
 

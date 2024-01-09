@@ -2,44 +2,41 @@ const express = require('express');
 const router = express.Router();
 
 // models
-const reservationModel = require('../models/reservation');
+const acceptedReservation = require('../models/acceptedReservation');
 
 router.get('/', async (req, res, next) => {
     try {
-        const docs = await reservationModel.find();
+        const docs = await acceptedReservation.find();
         res.json({
             count: docs.length,
-            reservations: docs
-        });
+            acceptedReservations: docs
+        })
     } catch (err) {
         res.json({
             Error: err.message
-        });
+        })
     }
 });
 
 router.post('/', async (req, res, next) => {
-    const reservation = ({
+    const accepted = ({
         reservistID: req.body.reservistID,
-        hostID: req.body.hostID,
         offerID: req.body.offerID,
-        locationName: req.body.locationName,
-        offerPrice: req.body.offerPrice,
         offerTitle: req.body.offerTitle,
-        reservistPhoto: req.body.reservistPhoto,
-        reservistName: req.body.reservistName
+        phoneNumber: req.body.phoneNumber,
+        email: req.body.email
     });
 
     try {
-        const docs = await reservationModel.create(reservation);
+        const docs = await acceptedReservation.create(accepted);
         res.json({
-            Success: 'Reservation has been created successfully!',
-            reservation: docs
-        });
+            Success: 'Reservation has been accepted!',
+            acceptedReservation: docs
+        })
     } catch (err) {
         res.json({
             Error: err.message
-        });
+        })
     }
 });
 
@@ -47,10 +44,10 @@ router.delete('/:id', async (req, res, next) => {
     const reservationID = req.params.id;
 
     try {
-        const docs = await reservationModel.findByIdAndDelete(reservationID);
+        const docs = await acceptedReservation.findByIdAndDelete(reservationID);
         res.json({
-            Success: 'Reservation deleted successfully!',
-            deletedReservation: docs
+            Success: 'Deleted successfully!',
+            deleted: docs
         })
     } catch (err) {
         res.json({

@@ -10,6 +10,10 @@ const reservationSchema = new Schema ({
         type: String,
         required: true
     },
+    offerID: {
+        type: String,
+        required: true
+    },
     locationName: {
         type: String,
         required: true

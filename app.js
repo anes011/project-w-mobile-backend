@@ -43,4 +43,8 @@ io.on('connection', (socket) => {
     socket.on('reserve', (msg) => {
         socket.broadcast.emit('receivedRes', msg);
     });
-})
+
+    socket.on('accept', (msg) => {
+        socket.broadcast.emit('accepted', msg);
+    });
+});
